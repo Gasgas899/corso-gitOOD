@@ -1,16 +1,20 @@
 1) sudo apt update
 2) sudo apt install git
 3) ssh-keygen -t ed25519 -C piertonio88@gmail.com
-4) add key
+4) add key: cat ~/.ssh/id_ed25519.pub
+
 utente@QK2204:~$ mkdir odoo16
 utente@QK2204:~$ cd odoo16
 utente@QK2204:~/odoo16$  git clone https://github.com/odoo/odoo.git
 
+Controllare se phyton è installato:
 5) python3 --version
 6) pip3 --versione
 7) sudo apt update
+
+HOW TO INSTALL POSTGRESQL AND PGADMIN4
 sudo apt install postgresql
-8)
+
 utente@QK2204:~/odoo16$ sudo systemctl is-active postgresql
 active
 utente@QK2204:~/odoo16$ sudo systemctl is-enabled postgresql
@@ -24,6 +28,8 @@ utente@QK2204:~/odoo16$ sudo systemctl status postgresql
 
 apr 22 13:32:51 QK2204 systemd[1]: Starting PostgreSQL RDBMS...
 apr 22 13:32:51 QK2204 systemd[1]: Finished PostgreSQL RDBMS.
+
+CTRL+C per chiudere
 
 utente@QK2204:~/odoo16$ sudo pg_isready
 /var/run/postgresql:5432 - accepting connections
@@ -43,10 +49,41 @@ CREATE DATABASE
 postgres=# GRANT ALL PRIVILEGES ON DATABASE lif to odoo;
 GRANT
 postgres=# \q
+exit
 
 CONFIGURE POSTGRESQL CLIENT AUTENTICATION
 sudo apt install vim
 utente@QK2204:~$ sudo su - postgres
 postgres@QK2204:~$ sudo vim /etc/postgresql/14/main/pg_hba.conf
 
-SOLVING PASSOWRD
+SOLVING: 
+"[sudo] password di postgres: 
+Riprovare."
+
+utente@QK2204:~/odoo16$ sudo passwd postgres
+Nuova password: 
+Reimmettere la nuova password: 
+passwd: password aggiornata correttamente
+
+SOLVING: "postgres non è nel file sudoers. Questo evento verrà segnalato."
+sudo -H /bin/bash
+usermod -aG sudo postgres
+exit
+
+postgres@QK2204:~$ sudo vim /etc/postgresql/14/main/pg_hba.conf
+
+
+host    all             all             127.0.0.1/32            scram-sha-256
+# IPv6 local connections:
+host    all             all             ::1/128                 scram-sha-256
+
+PREMERE "INS" nella tastiera
+change text:
+
+host    all             all             127.0.0.1/32            md5
+# IPv6 local connections:
+host    all             all             ::1/128                 md5
+
+
+
+
