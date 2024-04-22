@@ -106,3 +106,37 @@ sudo systemctl restart postgresql
 Collegarsi a:
 http://127.0.0.1/pgadmin4
 
+ERRORE FATAL PASSWORD RESOLVE IN LINK YOUTUBE:
+https://www.youtube.com/watch?v=vFENJpe6eJU
+
+comandi:
+sudo -i -u postgres
+postgres@QK2204:~$ psql
+psql (14.8 (Ubuntu 14.8-0ubuntu0.22.04.1))
+Type "help" for help.
+
+postgres=# \password sde
+Enter new password for user "sde": utente
+Enter it again: utente
+ERROR:  role "sde" does not exist
+postgres=# \password odoo
+Enter new password for user "odoo": utente
+Enter it again: utente
+postgres=# 
+
+rientra nel sito e continua configurazione server
+
+INSTALLING ODOO DEPENDENCE:
+ utente@QK2204:~/odoo16$ cd odoo
+utente@QK2204:~/odoo16/odoo$  sed -n -e '/^Depends:/,/^Pre/ s/ python3-\(.*\),/python3-\1/p' debian/control | sudo xargs apt-get install -y
+
+INSTALL WERFEGPDF
+utente@QK2204:~/odoo16/odoo$ sudo wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.jammy_amd64.deb
+utente@QK2204:~/odoo16/odoo$ sudo apt install -f ./wkhtmltox_0.12.6.1-3.jammy_amd64.deb
+sudo dpkg -i  wkhtmltox_0.12.6.1-3.jammy_amd64.deb
+sudo apt install -f
+wkhtmltopdf --version
+
+
+
+
