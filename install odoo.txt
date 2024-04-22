@@ -1,6 +1,6 @@
 1) sudo apt update
 2) sudo apt install git
-3) generate key
+3) ssh-keygen -t ed25519 -C piertonio88@gmail.com
 4) add key
 utente@QK2204:~$ mkdir odoo16
 utente@QK2204:~$ cd odoo16
